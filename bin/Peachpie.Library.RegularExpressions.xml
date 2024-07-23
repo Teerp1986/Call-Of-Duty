@@ -1,0 +1,1576 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Peachpie.Library.RegularExpressions</name>
+    </assembly>
+    <members>
+        <member name="T:Peachpie.Library.RegularExpressions.PcreGroupCollection">
+            <summary>
+            Collection of successful groups ordered by occurance as it is in PCRE.
+            </summary>
+        </member>
+        <member name="F:Peachpie.Library.RegularExpressions.PcreGroupCollection._match">
+            <summary>
+            Original <see cref="T:Peachpie.Library.RegularExpressions.Match"/>.
+            </summary>
+        </member>
+        <member name="F:Peachpie.Library.RegularExpressions.PcreGroupCollection._indexes">
+            <summary>
+            Indexes to <see cref="P:Peachpie.Library.RegularExpressions.Match.Groups"/>.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.PcreGroupCollection.IsDefault">
+            <summary>
+            Gets value indicating whether the collection is an uninitialized structure.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.PcreGroupCollection.GetIndexes(Peachpie.Library.RegularExpressions.Match)">
+            <summary>
+            Initializes map of successful matches ordered by their position in text.
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.Regex">
+            <summary>
+            Represents an immutable, compiled regular expression. Also
+            contains static methods that allow use of regular expressions without instantiating
+            a Regex explicitly.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.#ctor(System.String)">
+            <summary>
+            Creates and compiles a regular expression object for the specified regular
+            expression.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.#ctor(System.String,Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Creates and compiles a regular expression object for the
+            specified regular expression with options that modify the pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.ValidateMatchTimeout(System.TimeSpan)">
+            <summary>
+            Validates that the specified match timeout value is valid.
+            The valid range is <code>TimeSpan.Zero &lt; matchTimeout &lt;= Regex.MaximumMatchTimeout</code>.
+            </summary>
+            <param name="matchTimeout">The timeout value to validate.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">If the specified timeout is not within a valid range.
+            </exception>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Escape(System.String)">
+            <summary>
+            Escapes a minimal set of metacharacters (\, *, +, ?, |, {, [, (, ), ^, $, ., #, and
+            whitespace) by replacing them with their \ codes. This converts a string so that
+            it can be used as a constant within a regular expression safely. (Note that the
+            reason # and whitespace must be escaped is so the string can be used safely
+            within an expression parsed with x mode. If future Regex features add
+            additional metacharacters, developers should depend on Escape to escape those
+            characters as well.)
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Unescape(System.String)">
+            <summary>
+            Unescapes any escaped characters in the input string.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Regex.Options">
+            <summary>
+            Returns the options passed into the constructor
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Regex.MatchTimeout">
+            <summary>
+            The match timeout used by this Regex instance.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Regex.RightToLeft">
+            <summary>
+            Indicates whether the regular expression matches from right to left.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.ToString">
+            <summary>
+            Returns the regular expression pattern passed into the constructor
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.GetGroupNames">
+            <summary>
+            Returns the GroupNameCollection for the regular expression. This collection contains the
+            set of strings used to name capturing groups in the expression.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.GetGroupNumbers">
+            <summary>
+            Returns the integer group number corresponding to a group name.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.GroupNameFromNumber(System.Int32)">
+            <summary>
+            Retrieves a group name that corresponds to a group number.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.GroupNumberFromName(System.String)">
+            <summary>
+            Returns a group number that corresponds to a group name.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.IsMatch(System.String,System.String)">
+            <summary>
+            Searches the input string for one or more occurrences of the text supplied in the given pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.IsMatch(System.String,System.String,Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Searches the input string for one or more occurrences of the text
+            supplied in the pattern parameter with matching options supplied in the options
+            parameter.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.IsMatch(System.String)">
+            <summary>
+            Searches the input string for one or more matches using the previous pattern,
+            options, and starting position.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.IsMatch(System.String,System.Int32)">
+            <summary>
+            Searches the input string for one or more matches using the previous pattern and options,
+            with a new starting position.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Match(System.String,System.String)">
+            <summary>
+            Searches the input string for one or more occurrences of the text
+            supplied in the pattern parameter.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Match(System.String,System.String,Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Searches the input string for one or more occurrences of the text
+            supplied in the pattern parameter. Matching is modified with an option
+            string.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Match(System.String)">
+            <summary>
+            Matches a regular expression with a string and returns
+            the precise result as a RegexMatch object.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Match(System.String,System.Int32)">
+            <summary>
+            Matches a regular expression with a string and returns
+            the precise result as a RegexMatch object.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Match(System.String,System.Int32,System.Int32)">
+            <summary>
+            Matches a regular expression with a string and returns the precise result as a
+            RegexMatch object.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Matches(System.String,System.String)">
+            <summary>
+            Returns all the successful matches as if Match were called iteratively numerous times.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Matches(System.String,System.String,Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Returns all the successful matches as if Match were called iteratively numerous times.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Matches(System.String)">
+            <summary>
+            Returns all the successful matches as if Match was called iteratively numerous times.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Matches(System.String,System.Int32)">
+            <summary>
+            Returns all the successful matches as if Match was called iteratively numerous times.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,System.String,System.String)">
+            <summary>
+            Replaces all occurrences of the pattern with the <paramref name="replacement"/> pattern, starting at
+            the first character in the input string.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,System.String,System.String,Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Replaces all occurrences of
+            the <paramref name="pattern "/>with the <paramref name="replacement "/>
+            pattern, starting at the first character in the input string.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,System.String)">
+            <summary>
+            Replaces all occurrences of the previously defined pattern with the
+            <paramref name="replacement"/> pattern, starting at the first character in the
+            input string.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,System.String,System.Int32)">
+            <summary>
+            Replaces all occurrences of the previously defined pattern with the
+            <paramref name="replacement"/> pattern, starting at the first character in the
+            input string.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,System.String,System.Int32,System.Int64@)">
+            <summary>
+            Replaces all occurrences of the previously defined pattern with the
+            <paramref name="replacement"/> pattern, starting at the first character in the
+            input string.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Replaces all occurrences of the previously defined pattern with the
+            <paramref name="replacement"/> pattern, starting at the character position
+            <paramref name="startat"/>.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,System.String,System.Int32,System.Int32,System.Int64@)">
+            <summary>
+            Replaces all occurrences of the previously defined pattern with the
+            <paramref name="replacement"/> pattern, starting at the character position
+            <paramref name="startat"/>.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,System.String,Peachpie.Library.RegularExpressions.MatchEvaluator)">
+            <summary>
+            Replaces all occurrences of the <paramref name="pattern"/> with the recent
+            replacement pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,System.String,Peachpie.Library.RegularExpressions.MatchEvaluator,Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Replaces all occurrences of the <paramref name="pattern"/> with the recent
+            replacement pattern, starting at the first character.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,Peachpie.Library.RegularExpressions.MatchEvaluator)">
+            <summary>
+            Replaces all occurrences of the previously defined pattern with the recent
+            replacement pattern, starting at the first character position.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,Peachpie.Library.RegularExpressions.MatchEvaluator,System.Int32)">
+            <summary>
+            Replaces all occurrences of the previously defined pattern with the recent
+            replacement pattern, starting at the first character position.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,Peachpie.Library.RegularExpressions.MatchEvaluator,System.Int32,System.Int64@)">
+            <summary>
+            Replaces all occurrences of the previously defined pattern with the recent
+            replacement pattern, starting at the first character position.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,Peachpie.Library.RegularExpressions.MatchEvaluator,System.Int32,System.Int32)">
+            <summary>
+            Replaces all occurrences of the previously defined pattern with the recent
+            replacement pattern, starting at the character position
+            <paramref name="startat"/>.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Replace(System.String,Peachpie.Library.RegularExpressions.MatchEvaluator,System.Int32,System.Int32,System.Int64@)">
+            <summary>
+            Replaces all occurrences of the previously defined pattern with the recent
+            replacement pattern, starting at the character position
+            <paramref name="startat"/>.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Split(System.String,System.String)">
+            <summary>
+            Splits the <paramref name="input "/>string at the position defined
+            by <paramref name="pattern"/>.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Split(System.String,System.String,Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Splits the <paramref name="input "/>string at the position defined by <paramref name="pattern"/>.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Split(System.String)">
+            <summary>
+            Splits the <paramref name="input"/> string at the position defined by a
+            previous pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Split(System.String,System.Int32)">
+            <summary>
+            Splits the <paramref name="input"/> string at the position defined by a
+            previous pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Regex.Split(System.String,System.Int32,System.Int32)">
+            <summary>
+            Splits the <paramref name="input"/> string at the position defined by a
+            previous pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexBoyerMoore.#ctor(System.String,System.Boolean,System.Boolean,System.Globalization.CultureInfo)">
+            <summary>
+            Constructs a Boyer-Moore state machine for searching for the string
+            pattern. The string must not be zero-length.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexBoyerMoore.IsMatch(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            When a regex is anchored, we can do a quick IsMatch test instead of a Scan
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexBoyerMoore.Scan(System.String,System.Int32,System.Int32,System.Int32)">
+             <summary>
+             Scan uses the Boyer-Moore algorithm to find the first occurrence
+             of the specified string within text, beginning at index, and
+             constrained within beglimit and endlimit.
+            
+             The direction and case-sensitivity of the match is determined
+             by the arguments to the RegexBoyerMoore constructor.
+             </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.Capture">
+            <summary>
+            Represents the results from a single subexpression capture. The object represents
+            one substring for a single successful capture.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Capture.Index">
+            <summary>
+            Returns the position in the original string where the first character of
+            captured substring was found.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Capture.Length">
+            <summary>
+            Returns the length of the captured substring.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Capture.Text">
+            <summary>
+            The original string
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Capture.Value">
+            <summary>
+            Returns the value of this Regex Capture.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Capture.ToString">
+            <summary>
+            Returns the substring that was matched.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Capture.GetLeftSubstring">
+            <summary>
+            The substring to the left of the capture
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Capture.GetRightSubstring">
+            <summary>
+            The substring to the right of the capture
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.CaptureCollection">
+            <summary>
+            Represents a sequence of capture substrings. The object is used
+            to return the set of captures done by a single capturing group.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.CaptureCollection.Count">
+            <summary>
+            Returns the number of captures.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.CaptureCollection.Item(System.Int32)">
+            <summary>
+            Returns a specific capture, by index, in this collection.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.CaptureCollection.GetEnumerator">
+            <summary>
+            Provides an enumerator in the same order as Item[].
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.CaptureCollection.GetCapture(System.Int32)">
+            <summary>
+            Returns the set of captures for the group
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.#ctor">
+            <summary>
+            Creates an empty character class.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.AddCharClass(Peachpie.Library.RegularExpressions.RegexCharClass)">
+            <summary>
+            Adds a regex char class
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.AddSet(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Adds a set (specified by its string representation) to the class.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.AddRange(System.Char,System.Char)">
+            <summary>
+            Adds a single range of characters to the class.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.AddLowercase(System.Globalization.CultureInfo)">
+            <summary>
+            Adds to the class any lowercase versions of characters already
+            in the class. Used for case-insensitivity.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.AddLowercaseRange(System.Char,System.Char,System.Globalization.CultureInfo)">
+            <summary>
+            For a single range that's in the set, adds any additional ranges
+            necessary to ensure that lowercase equivalents are also included.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.SingletonChar(System.String)">
+            <summary>
+            Returns the char
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.IsSingleton(System.String)">
+            <summary>
+            <c>true</c> if the set contains a single character only
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.IsSubtraction(System.String)">
+            <remarks>
+            Character class subtraction is not supported, used just in assertions in a regressive test fashion.
+            </remarks>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.CharInClassInternal(System.Char,System.String,System.Int32,System.Int32)">
+            <summary>
+            Determines a character's membership in a character class (via the
+            string representation of the class).
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.CharInCategoryGroup(System.Char,System.Globalization.UnicodeCategory,System.String,System.Int32@)">
+            <summary>
+            This is used for categories which are composed of other categories - L, N, Z, W...
+            These groups need special treatment when they are negated
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.RangeCount">
+            <summary>
+            The number of single ranges that have been accumulated so far.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.ToStringClass">
+            <summary>
+            Constructs the string representation of the class.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.GetRangeAt(System.Int32)">
+            <summary>
+            The ith range.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexCharClass.Canonicalize">
+            <summary>
+            Logic to reduce a character class to a unique, sorted form.
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.RegexCharClass.LowerCaseMapping">
+            <summary>
+            Lower case mapping descriptor.
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.RegexCharClass.SingleRangeComparer">
+            <summary>
+            For sorting ranges; compare based on the first char in the range.
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.RegexCharClass.SingleRange">
+            <summary>
+            A first/last pair representing a single range of characters.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexFCD.FirstChars(Peachpie.Library.RegularExpressions.RegexTree)">
+            <summary>
+            This is the one of the only two functions that should be called from outside.
+            It takes a RegexTree and computes the set of chars that can start it.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexFCD.Prefix(Peachpie.Library.RegularExpressions.RegexTree)">
+            <summary>
+            This is a related computation: it takes a RegexTree and computes the
+            leading substring if it see one. It's quite trivial and gives up easily.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexFCD.Anchors(Peachpie.Library.RegularExpressions.RegexTree)">
+            <summary>
+            Yet another related computation: it takes a RegexTree and computes
+            the leading anchors that it encounters.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexFCD.AnchorFromType(System.Int32)">
+            <summary>
+            Convert anchor type to anchor bit.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexFCD.PushInt(System.Int32)">
+            <summary>
+            To avoid recursion, we use a simple integer stack.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexFCD.PushFC(Peachpie.Library.RegularExpressions.RegexFC)">
+            <summary>
+            We also use a stack of RegexFC objects.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexFCD.Dispose">
+            <summary>
+            Return rented buffers.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexFCD.RegexFCFromRegexTree(Peachpie.Library.RegularExpressions.RegexTree)">
+            <summary>
+            The main FC computation. It does a shortcutted depth-first walk
+            through the tree and calls CalculateFC to emits code before
+            and after each child of an interior node, and at each leaf.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexFCD.SkipChild">
+            <summary>
+            Called in Beforechild to prevent further processing of the current child
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexFCD.CalculateFC(System.Int32,Peachpie.Library.RegularExpressions.RegexNode,System.Int32)">
+            <summary>
+            FC computation and shortcut cases for each node type
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.Group">
+            <summary>
+            Represents the results from a single capturing group. A capturing group can
+            capture zero, one, or more strings in a single match because of quantifiers, so
+            Group supplies a collection of Capture objects.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Group.Id">
+            <summary>
+            Index within containing <see cref="T:Peachpie.Library.RegularExpressions.GroupCollection"/>.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Group.Success">
+            <summary>
+            Indicates whether the match is successful.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Group.Captures">
+            <summary>
+            Returns a collection of all the captures matched by the capturing
+            group, in innermost-leftmost-first order (or innermost-rightmost-first order if
+            compiled with the "r" option). The collection may have zero or more items.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Group.Synchronized(Peachpie.Library.RegularExpressions.Group)">
+            <summary>
+            Returns a Group object equivalent to the one supplied that is safe to share between
+            multiple threads.
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.GroupCollection">
+            <summary>
+            Represents a sequence of capture substrings. The object is used
+            to return the set of captures done by a single capturing group.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.GroupCollection.Count">
+            <summary>
+            Returns the number of groups.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.GroupCollection.GetEnumerator">
+            <summary>
+            Provides an enumerator in the same order as Item[].
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.GroupCollection.GetGroupImpl(System.Int32)">
+            <summary>
+            Caches the group objects
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.Match">
+            <summary>
+            Represents the results from a single regular expression match.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Match.#ctor(Peachpie.Library.RegularExpressions.Match)">
+            <summary>
+            Copy constructor
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Match.Empty">
+            <summary>
+            Returns an empty Match object.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Match.NextMatch">
+            <summary>
+            Returns a new Match with the results for the next match, starting
+            at the position at which the last match ended (at the character beyond the last
+            matched character).
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Match.Result(System.String)">
+            <summary>
+            Returns the expansion of the passed replacement pattern. For
+            example, if the replacement pattern is ?$1$2?, Result returns the concatenation
+            of Group(1).ToString() and Group(2).ToString().
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Match.Synchronized(Peachpie.Library.RegularExpressions.Match)">
+            <summary>
+            Returns a Match instance equivalent to the one supplied that is safe to share
+            between multiple threads.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Match.AddMatch(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Adds a capture to the group specified by "cap"
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Match.RemoveMatch(System.Int32)">
+            <summary>
+            Removes a group match by capnum
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Match.IsMatched(System.Int32)">
+            <summary>
+            Tells if a group was matched by capnum
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Match.MatchIndex(System.Int32)">
+            <summary>
+            Returns the index of the last specified matched group by capnum
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Match.MatchLength(System.Int32)">
+            <summary>
+            Returns the length of the last specified matched group by capnum
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.Match.Tidy(System.Int32)">
+            <summary>
+            Tidy the match so that it can be used as an immutable result
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.MatchSparse">
+            <summary>
+            MatchSparse is for handling the case where slots are sparsely arranged (e.g., if somebody says use slot 100000)
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.MatchCollection">
+            <summary>
+            Represents the set of names appearing as capturing group
+            names in a regular expression.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.MatchCollection.Count">
+            <summary>
+            Returns the number of captures.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.MatchCollection.Item(System.Int32)">
+            <summary>
+            Returns the ith Match in the collection.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.MatchCollection.GetEnumerator">
+            <summary>
+            Provides an enumerator in the same order as Item[i].
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.RegexMatchTimeoutException">
+            <summary>
+            This is the exception that is thrown when a RegEx matching timeout occurs.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexMatchTimeoutException.#ctor(System.String,System.String,System.TimeSpan)">
+            <summary>
+            Constructs a new RegexMatchTimeoutException.
+            </summary>
+            <param name="regexInput">Matching timeout occurred during matching within the specified input.</param>
+            <param name="regexPattern">Matching timeout occurred during matching to the specified pattern.</param>
+            <param name="matchTimeout">Matching timeout occurred because matching took longer than the specified timeout.</param>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexMatchTimeoutException.#ctor">
+            <summary>
+            This constructor is provided in compliance with common NetFx design patterns;
+            developers should prefer using the constructor
+            <code>public RegexMatchTimeoutException(string input, string pattern, TimeSpan matchTimeout)</code>.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexMatchTimeoutException.#ctor(System.String)">
+            <summary>
+            This constructor is provided in compliance with common NetFx design patterns;
+            developers should prefer using the constructor
+            <code>public RegexMatchTimeoutException(string input, string pattern, TimeSpan matchTimeout)</code>.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexMatchTimeoutException.#ctor(System.String,System.Exception)">
+            <summary>
+            This constructor is provided in compliance with common NetFx design patterns;
+            developers should prefer using the constructor
+            <code>public RegexMatchTimeoutException(string input, string pattern, TimeSpan matchTimeout)</code>.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a <code>null</code>.</param>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexNode.MakeRep(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Pass type as OneLazy or OneLoop
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexNode.Reduce">
+            <summary>
+            Removes redundant nodes from the subtree, and returns a reduced subtree.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexNode.StripEnation(System.Int32)">
+            <summary>
+            Simple optimization. If a concatenation or alternation has only
+            one child strip out the intermediate node. If it has zero children,
+            turn it into an empty.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexNode.ReduceGroup">
+            <summary>
+            Simple optimization. Once parsed into a tree, non-capturing groups
+            serve no function, so strip them out.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexNode.ReduceRep">
+            <summary>
+            Nested repeaters just get multiplied with each other if they're not
+            too lumpy
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexNode.ReduceSet">
+            <summary>
+            Simple optimization. If a set is a singleton, an inverse singleton,
+            or empty, it's transformed accordingly.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexNode.ReduceAlternation">
+             <summary>
+             Combine adjacent sets/chars.
+             Basic optimization. Single-letter alternations can be replaced
+             by faster set specifications, and nested alternations with no
+             intervening operators can be flattened:
+            
+             a|b|c|def|g|h -> [a-c]|def|[gh]
+             apple|(?:orange|pear)|grape -> apple|orange|pear|grape
+             </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexNode.ReduceConcatenation">
+             <summary>
+             Eliminate empties and concat adjacent strings/chars.
+             Basic optimization. Adjacent strings can be concatenated.
+            
+             (?:abc)(?:def) -> abcdef
+             </summary>
+        </member>
+        <member name="F:Peachpie.Library.RegularExpressions.RegexOptions.PCRE_S">
+            <summary>
+            Spend more time studying the pattern - ignoring.
+            </summary>
+        </member>
+        <member name="F:Peachpie.Library.RegularExpressions.RegexOptions.PCRE2_DUPNAMES">
+            <summary>
+            Allow different capture groups to have the same name (forbidden by default).
+            </summary>
+        </member>
+        <member name="F:Peachpie.Library.RegularExpressions.RegexOptions.PCRE2_NO_AUTO_CAPTURE">
+            <summary>
+            Disables the use of numbered capturing parentheses in the pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexOptionExtensions.GetNewlineConvention(Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Extract only the newline conventions from the options.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexOptionExtensions.WithNewlineConvention(Peachpie.Library.RegularExpressions.RegexOptions,Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Clear previous newline convention and set it to the given one.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexOptionExtensions.GetBsrNewlineConvention(Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Extract only the \R newline conventions from the options.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexOptionExtensions.WithBsrNewlineConvention(Peachpie.Library.RegularExpressions.RegexOptions,Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Clear previous \R newline convention and set it to the given one.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.RegexParseException.Offset">
+            <summary>
+            The offset in the supplied pattern.
+            </summary>
+        </member>
+        <member name="F:Peachpie.Library.RegularExpressions.RegexParser._offsetPos">
+            <summary>Relative offset of the <see cref="F:Peachpie.Library.RegularExpressions.RegexParser._pattern"/> within the actual input string.</summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.RegexParser.BranchResetStackFrame">
+            <summary>Helper structure to handle the parsing of branch reset groups</summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.TrimDelimiters(System.String,System.Int32,System.Int32@)">
+            <summary>
+            Matches end and start delimiters and returns enclosed pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.TrimPcreRegexOption(System.String,System.Int32@)">
+            <summary>
+            Trims PCRE options and gets new pattern end.
+            The remaining string is the pattern enclosed in PCRE delimiters.
+            </summary>
+            <param name="pattern">Input pattern.</param>
+            <param name="end">New pattern length.</param>
+            <returns>PCRE options.</returns>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.TrimPcreSpecialSequences(System.ReadOnlySpan{System.Char}@)">
+            <summary>
+            Parse all the special sequences at the start, e.g. (*UTF8)(*BSR_ANYCRLF)
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.ParseReplacement(System.String,Peachpie.Library.RegularExpressions.RegexOptions,System.Collections.Generic.Dictionary{System.Int32,System.Int32},System.Int32,System.Collections.Generic.Dictionary{System.String,System.Int32})">
+            <summary>
+            This static call constructs a flat concatenation node given a replacement pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.Escape(System.String)">
+            <summary>
+            Escapes all metacharacters (including |,(,),[,{,|,^,$,*,+,?,\, spaces and #)
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.Unescape(System.String)">
+            <summary>
+            Unescapes all metacharacters (including (,),[,],{,},|,^,$,*,+,?,\, spaces and #)
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.Reset(Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Resets parsing to the beginning of the pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.ScanBacktrackingVerb">
+            <summary>
+            Scans the backtracking verb (e.g. (*FAIL), (*SKIP)) not counting the leading "(*".
+            Returns its RegexCode or throws a parse exception if invalid.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.ScanBackslashRef">
+            <summary>
+            Scans \digits, expecting \digits to the right.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.ScanHex2OrEnclosed">
+            <summary>
+            Scans hex digits enclosed in curly braces or scans two hexadecimal digits.
+            Parsing starts at opening curly brace and ends after the right curly brace.
+            </summary>
+            <returns>Unicode character.</returns>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.ScanHex(System.Int32)">
+            <summary>
+            Scans exactly <paramref name="c"/> characters.
+            </summary>
+            <param name="c">How many characters will be read.</param>
+            <returns>Parsed character from hex number.</returns>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.OptionFromCode(System.Char)">
+            <summary>
+            Returns option bit from single-char (?cimsx) code.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.PcreOptionFromCode(System.Char,System.Int32)">
+            <summary>
+            Gets PCRE option value.
+            </summary>
+            <param name="option">PCRE option character. Case sensitive.</param>
+            <param name="offset">Position in the source string.</param>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.StartBranchResetGroup">
+            <summary>
+            To be called whenever (?|... is encountered. Expects to be followed by <see cref="M:Peachpie.Library.RegularExpressions.RegexParser.TryAddBranchResetNesting"/>
+            immediately (before any other branch-reset-related method).
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.TryMoveNextBranchResetGroup">
+            <summary>
+            To be called whenever '|' is encountered. If '|' divides alternatives inside a branch reset group,
+            it resets _autocap to the value at the start of the branch.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.TryAddBranchResetNesting">
+            <summary>
+            To be called whenever a capture group opening (of any type) is encountered. Helps to identify
+            when '|' later discovered belongs to a branch nested group.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.TryRemoveBranchResetNesting">
+            <summary>
+            To be called whenever a capture group closing (of any type) is encountered. Helps to identify
+            when '|' later discovered belongs to a branch nested group and also saves and restores the maximum
+            value of <see cref="F:Peachpie.Library.RegularExpressions.RegexParser._autocap"/> within the branch reset group.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexParser.CreateNewLineParseNode(Peachpie.Library.RegularExpressions.RegexParser.NewlineTypes,Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Creates a <see cref="T:Peachpie.Library.RegularExpressions.RegexNode"/> which processes new lines according to their specified types
+            and current settings, see:
+            https://www.pcre.org/original/doc/html/pcrepattern.html#SEC27
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexReplacement.#ctor(System.String,Peachpie.Library.RegularExpressions.RegexNode,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Since RegexReplacement shares the same parser as Regex,
+            the constructor takes a RegexNode which is a concatenation
+            of constant strings and backreferences.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexReplacement.GetOrCreate(System.WeakReference{Peachpie.Library.RegularExpressions.RegexReplacement},System.String,System.Collections.Generic.Dictionary{System.Int32,System.Int32},System.Int32,System.Collections.Generic.Dictionary{System.String,System.Int32},Peachpie.Library.RegularExpressions.RegexOptions)">
+            <summary>
+            Either returns a weakly cached RegexReplacement helper or creates one and caches it.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.RegexReplacement.Pattern">
+            <summary>
+            The original pattern string
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexReplacement.ReplacementImpl(System.Text.ValueStringBuilder@,Peachpie.Library.RegularExpressions.Match)">
+            <summary>
+            Given a Match, emits into the StringBuilder the evaluated
+            substitution pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexReplacement.ReplacementImplRTL(System.Text.ValueStringBuilder@,Peachpie.Library.RegularExpressions.Match)">
+            <summary>
+            Given a Match, emits into the ValueStringBuilder the evaluated
+            Right-to-Left substitution pattern.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexReplacement.Replace(Peachpie.Library.RegularExpressions.Regex,System.String,System.Int32,System.Int32,System.Int64@)">
+             <summary>
+             Replaces all occurrences of the regex in the string with the
+             replacement pattern.
+            
+             Note that the special case of no matches is handled on its own:
+             with no matches, the input string is returned unchanged.
+             The right-to-left case is split out because StringBuilder
+             doesn't handle right-to-left string building directly very well.
+             </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexReplacement.Replace(Peachpie.Library.RegularExpressions.MatchEvaluator,Peachpie.Library.RegularExpressions.Regex,System.String,System.Int32,System.Int32,System.Int64@)">
+             <summary>
+             Replaces all occurrences of the regex in the string with the
+             replacement evaluator.
+            
+             Note that the special case of no matches is handled on its own:
+             with no matches, the input string is returned unchanged.
+             The right-to-left case is split out because StringBuilder
+             doesn't handle right-to-left string building directly very well.
+             </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexReplacement.Split(Peachpie.Library.RegularExpressions.Regex,System.String,System.Int32,System.Int32)">
+            <summary>
+            Does a split. In the right-to-left case we reorder the
+            array to be forwards.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.Scan(Peachpie.Library.RegularExpressions.Regex,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+             <summary>
+             Scans the string to find the first match. Uses the Match object
+             both to feed text in and as a place to store matches that come out.
+            
+             All the action is in the abstract Go() method defined by subclasses. Our
+             responsibility is to load up the class members (as done here) before
+             calling Go.
+            
+             The optimizer can compute a set of candidate starting characters,
+             and we could use a separate method Skip() that will quickly scan past
+             any characters that we know can't match.
+             </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.Go(System.Int32@)">
+            <summary>
+            The responsibility of Go() is to run the regular expression at
+            runtextpos and call Capture() on all the captured subexpressions,
+            then to leave runtextpos at the ending position. It should leave
+            runtextpos where it started if there was no match.
+            </summary>
+            <param name="bump">
+            The offset by which to increase the current text position before
+            <see cref="M:Peachpie.Library.RegularExpressions.RegexRunner.Go(System.Int32@)"/> is called again. Might be modified by
+            backtracking control verbs.
+            </param>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.FindFirstChar">
+            <summary>
+            The responsibility of FindFirstChar() is to advance runtextpos
+            until it is at the next position which is a candidate for the
+            beginning of a successful match.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.InitTrackCount">
+            <summary>
+            InitTrackCount must initialize the runtrackcount field; this is
+            used to know how large the initial runtrack and runstack arrays
+            must be.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.InitMatch">
+            <summary>
+            Initializes all the data members that are used by Go()
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.TidyMatch(System.Boolean)">
+            <summary>
+            Put match in its canonical form before returning it.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.EnsureStorage">
+            <summary>
+            Called by the implementation of Go() to increase the size of storage
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.IsBoundary(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Called by the implementation of Go() to decide whether the pos
+            at the specified index is a boundary or not. It's just not worth
+            emitting inline code for this logic.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.DoubleTrack">
+            <summary>
+            Called by the implementation of Go() to increase the size of the
+            backtracking stack.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.DoubleStack">
+            <summary>
+            Called by the implementation of Go() to increase the size of the
+            grouping stack.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.DoubleCrawl">
+            <summary>
+            Increases the size of the longjump unrolling stack.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.Crawl(System.Int32)">
+            <summary>
+            Save a number on the longjump unrolling stack
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.Popcrawl">
+            <summary>
+            Remove a number from the longjump unrolling stack
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.Crawlpos">
+            <summary>
+            Get the height of the stack
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.Capture(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Called by Go() to capture a subexpression. Note that the
+            capnum used here has already been mapped to a non-sparse
+            index (by the code generator RegexWriter).
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.TransferCapture(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Called by Go() to capture a subexpression. Note that the
+            capnum used here has already been mapped to a non-sparse
+            index (by the code generator RegexWriter).
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.IsMatched(System.Int32)">
+            <summary>
+            Call out to runmatch to get around visibility issues
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.MatchIndex(System.Int32)">
+            <summary>
+            Call out to runmatch to get around visibility issues
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexRunner.MatchLength(System.Int32)">
+            <summary>
+            Call out to runmatch to get around visibility issues
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.RegexUtf8RangeTransformer">
+            <summary>
+            Helper class to transform typical UTF-8 ranges expressed as sequences of byte ranges to UTF-16 ranges,
+            e.g. <c>[\xC2-\xDF][\x80-\xBF]</c> to <c>[\u0080-\u07FF]</c>.
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.RegexUtf8RangeTransformer.MatchState">
+            <summary>
+            State of a helper automaton to identify the sequence of ranges and supply the resulting UTF-16 range.
+            All its states are immutable and static, the user traverses it by navigating through their references.
+            </summary>
+        </member>
+        <member name="F:Peachpie.Library.RegularExpressions.RegexUtf8RangeTransformer.MatchState.Start">
+            <summary>
+            Initial state of the automaton waiting for the first range input.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexUtf8RangeTransformer.TryTransformRanges(Peachpie.Library.RegularExpressions.RegexNode)">
+            <summary>
+            Attempts to identify common patterns for matching UTF-8 ranges and convert them to UTF-16 ranges
+            by modifying the children of the given concatenation.
+            </summary>
+            <param name="concatenation"></param>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexWriter.Write(Peachpie.Library.RegularExpressions.RegexTree)">
+            <summary>
+            This is the only function that should be called from outside.
+            It takes a RegexTree and creates a corresponding RegexCode.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexWriter.Dispose">
+            <summary>
+            Return rented buffers.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexWriter.RegexCodeFromRegexTree(Peachpie.Library.RegularExpressions.RegexTree)">
+            <summary>
+            The top level RegexCode generator. It does a depth-first walk
+            through the tree and calls EmitFragment to emits code before
+            and after each child of an interior node, and at each leaf.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexWriter.PatchJump(System.Int32,System.Int32)">
+            <summary>
+            Fixes up a jump instruction at the specified offset
+            so that it jumps to the specified jumpDest.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexWriter.Emit(System.Int32)">
+            <summary>
+            Emits a zero-argument operation. Note that the emit
+            functions all run in two modes: they can emit code, or
+            they can just count the size of the code.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexWriter.Emit(System.Int32,System.Int32)">
+            <summary>
+            Emits a one-argument operation.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexWriter.Emit(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Emits a two-argument operation.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexWriter.StringCode(System.String)">
+            <summary>
+            Returns an index in the string table for a string;
+            uses a hashtable to eliminate duplicates.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexWriter.MapCapnum(System.Int32)">
+            <summary>
+            When generating code on a regex that uses a sparse set
+            of capture slots, we hash them to a dense set of indices
+            for an array of capture slots. Instead of doing the hash
+            at match time, it's done at compile time, here.
+            </summary>
+        </member>
+        <member name="M:Peachpie.Library.RegularExpressions.RegexWriter.EmitFragment(System.Int32,Peachpie.Library.RegularExpressions.RegexNode,System.Int32)">
+            <summary>
+            The main RegexCode generator. It does a depth-first walk
+            through the tree and calls EmitFragment to emits code before
+            and after each child of an interior node, and at each leaf.
+            </summary>
+        </member>
+        <member name="T:Peachpie.Library.RegularExpressions.Resources.Resource">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.AlternationCantCapture">
+            <summary>
+              Looks up a localized string similar to Alternation conditions do not capture and cannot be named..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.AlternationCantHaveComment">
+            <summary>
+              Looks up a localized string similar to Alternation conditions cannot be comments..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.Arg_ArrayPlusOffTooSmall">
+            <summary>
+              Looks up a localized string similar to Destination array is not long enough to copy all the items in the collection. Check array index and length..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.ArgumentNull_ArrayWithNullElements">
+            <summary>
+              Looks up a localized string similar to The array cannot contain null elements..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.BadClassInCharRange">
+            <summary>
+              Looks up a localized string similar to Cannot include class \\{0} in character range..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.BeginIndexNotNegative">
+            <summary>
+              Looks up a localized string similar to Start index cannot be less than 0 or greater than input length..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.CapnumNotZero">
+            <summary>
+              Looks up a localized string similar to Capture number cannot be zero..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.CaptureGroupOutOfRange">
+            <summary>
+              Looks up a localized string similar to Capture group numbers must be less than or equal to Int32.MaxValue..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.CountTooSmall">
+            <summary>
+              Looks up a localized string similar to Count cannot be less than -1..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.DefineMoreThanOneBranch">
+            <summary>
+              Looks up a localized string similar to DEFINE subpattern contains more than one branch..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.delimiter_alnum_backslash">
+            <summary>
+              Looks up a localized string similar to Delimiter must not be alphanumeric or backslash.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.DifferentSubpatternNames">
+            <summary>
+              Looks up a localized string similar to Different names for subpatterns of the same number ({0}) are not allowed..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.DuplicateSubpatternName">
+            <summary>
+              Looks up a localized string similar to Two named subpatterns have the same name &apos;{0}&apos; (PCRE2_DUPNAMES not set)..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.EnumNotStarted">
+            <summary>
+              Looks up a localized string similar to Enumeration has either not started or has already finished..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.IllegalCondition">
+            <summary>
+              Looks up a localized string similar to Illegal conditional (?(...)) expression..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.IllegalDefaultRegexMatchTimeoutInAppDomain">
+            <summary>
+              Looks up a localized string similar to AppDomain data &apos;{0}&apos; contains the invalid value or object &apos;{1}&apos; for specifying a default matching timeout for System.Text.RegularExpressions.Regex..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.IllegalEndEscape">
+            <summary>
+              Looks up a localized string similar to Illegal \\ at end of pattern..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.IllegalRange">
+            <summary>
+              Looks up a localized string similar to Illegal {x,y} with x &gt; y..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.IncompleteSlashP">
+            <summary>
+              Looks up a localized string similar to Incomplete \\p{X} character escape..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.InternalError_ScanRegex">
+            <summary>
+              Looks up a localized string similar to Internal error in ScanRegex..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.InvalidBacktrackingVerb">
+            <summary>
+              Looks up a localized string similar to Invalid, unsupported or ill-formed backtracking verb &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.InvalidEmptyArgument">
+            <summary>
+              Looks up a localized string similar to Argument {0} cannot be zero-length..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.InvalidGroupName">
+            <summary>
+              Looks up a localized string similar to Invalid group name: Group names must begin with a word character..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.LengthNotNegative">
+            <summary>
+              Looks up a localized string similar to Length cannot be less than 0 or exceed input length..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.MalformedNameRef">
+            <summary>
+              Looks up a localized string similar to Malformed \\k&lt;...&gt; named back reference..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.MalformedReference">
+            <summary>
+              Looks up a localized string similar to (?({0}) ) malformed..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.MalformedSlashP">
+            <summary>
+              Looks up a localized string similar to Malformed \\p{X} character escape..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.MissingControl">
+            <summary>
+              Looks up a localized string similar to Missing control character..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.modifier_not_supported">
+            <summary>
+              Looks up a localized string similar to Ignoring unsupported pattern modifier &apos;{0}&apos; in perl regular expression.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.modifier_unknown">
+            <summary>
+              Looks up a localized string similar to Unknown modifier &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.modifiers_inconsistent">
+            <summary>
+              Looks up a localized string similar to Pattern modifier &apos;{0}&apos; is ignored due to use of modifier &apos;{1}&apos; in perl regular expression.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.NestedQuantify">
+            <summary>
+              Looks up a localized string similar to Nested quantifier &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.NoResultOnFailed">
+            <summary>
+              Looks up a localized string similar to Result cannot be called on a failed Match..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.NotEnoughParens">
+            <summary>
+              Looks up a localized string similar to Not enough )&apos;s..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.NotSupported_ReadOnlyCollection">
+            <summary>
+              Looks up a localized string similar to Collection is read-only..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.OnlyAllowedOnce">
+            <summary>
+              Looks up a localized string similar to This operation is only allowed once per object..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.PlatformNotSupported_CompileToAssembly">
+            <summary>
+              Looks up a localized string similar to This platform does not support writing compiled regular expressions to an assembly..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.preg_match_pattern_set_order">
+            <summary>
+              Looks up a localized string similar to PREG_PATTERN_ORDER and PREG_SET_ORDER flags are mutually exclusive.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.preg_no_end_delimiter">
+            <summary>
+              Looks up a localized string similar to No ending delimiter &apos;{0}&apos; found.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.QuantifyAfterNothing">
+            <summary>
+              Looks up a localized string similar to Quantifier {x,y} following nothing..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.RegexMatchTimeoutException_Occurred">
+            <summary>
+              Looks up a localized string similar to The RegEx engine has timed out while trying to match a pattern to an input string. This can occur for many reasons, including very large inputs or excessive backtracking caused by nested quantifiers, back-references and other factors..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.regexp_cannot_end_with_open_bracket">
+            <summary>
+              Looks up a localized string similar to Regular expression cannot end with &apos;(&apos;.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.regexp_cannot_end_with_two_backslashes">
+            <summary>
+              Looks up a localized string similar to Regular expression cannot end with &apos;\\&apos;.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.regexp_duplicate_quantifier">
+            <summary>
+              Looks up a localized string similar to Nothing to repeat - duplicate quantifier at offset {0} in matching part of regular expression..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.regular_expression_empty">
+            <summary>
+              Looks up a localized string similar to Empty regular expression.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.ReplacementError">
+            <summary>
+              Looks up a localized string similar to Replacement pattern error..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.ReversedCharRange">
+            <summary>
+              Looks up a localized string similar to [x-y] range in reverse order..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.SubtractionMustBeLast">
+            <summary>
+              Looks up a localized string similar to A subtraction must be the last element in a character class..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.TooFewHex">
+            <summary>
+              Looks up a localized string similar to Insufficient hexadecimal digits..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.TooManyAlternates">
+            <summary>
+              Looks up a localized string similar to Too many | in (?()|)..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.TooManyParens">
+            <summary>
+              Looks up a localized string similar to Too many )&apos;s..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UndefinedBackref">
+            <summary>
+              Looks up a localized string similar to Reference to undefined group number {0}..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UndefinedNameRef">
+            <summary>
+              Looks up a localized string similar to Reference to undefined group name &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UndefinedReference">
+            <summary>
+              Looks up a localized string similar to (?({0}) ) reference to undefined group..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UndefinedSubpattern">
+            <summary>
+              Looks up a localized string similar to Reference to undefined subpattern {0}..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UnexpectedOpcode">
+            <summary>
+              Looks up a localized string similar to Unexpected opcode in regular expression generation: {0}..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UnimplementedState">
+            <summary>
+              Looks up a localized string similar to Unimplemented state..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UnknownProperty">
+            <summary>
+              Looks up a localized string similar to Unknown property &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.unrecognized_character_after_backslash">
+            <summary>
+              Looks up a localized string similar to Unrecognized character &apos;{0}&apos; follows \\.
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UnrecognizedControl">
+            <summary>
+              Looks up a localized string similar to Unrecognized control character..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UnrecognizedEscape">
+            <summary>
+              Looks up a localized string similar to Unrecognized escape sequence \\{0}..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UnrecognizedGrouping">
+            <summary>
+              Looks up a localized string similar to Unrecognized grouping construct..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UnterminatedBracket">
+            <summary>
+              Looks up a localized string similar to Unterminated [] set..
+            </summary>
+        </member>
+        <member name="P:Peachpie.Library.RegularExpressions.Resources.Resource.UnterminatedComment">
+            <summary>
+              Looks up a localized string similar to Unterminated (?#...) comment..
+            </summary>
+        </member>
+        <member name="M:System.Text.ValueStringBuilder.GetPinnableReference">
+            <summary>
+            Get a pinnable reference to the builder.
+            Does not ensure there is a null char after <see cref="P:System.Text.ValueStringBuilder.Length"/>
+            This overload is pattern matched in the C# 7.3+ compiler so you can omit
+            the explicit method call, and write eg "fixed (char* c = builder)"
+            </summary>
+        </member>
+        <member name="M:System.Text.ValueStringBuilder.GetPinnableReference(System.Boolean)">
+            <summary>
+            Get a pinnable reference to the builder.
+            </summary>
+            <param name="terminate">Ensures that the builder has a null char after <see cref="P:System.Text.ValueStringBuilder.Length"/></param>
+        </member>
+        <member name="P:System.Text.ValueStringBuilder.RawChars">
+            <summary>Returns the underlying storage of the builder.</summary>
+        </member>
+        <member name="M:System.Text.ValueStringBuilder.AsSpan(System.Boolean)">
+            <summary>
+            Returns a span around the contents of the builder.
+            </summary>
+            <param name="terminate">Ensures that the builder has a null char after <see cref="P:System.Text.ValueStringBuilder.Length"/></param>
+        </member>
+        <member name="M:System.Text.ValueStringBuilder.Grow(System.Int32)">
+            <summary>
+            Resize the internal buffer either by doubling current buffer size or
+            by adding <paramref name="additionalCapacityBeyondPos"/> to
+            <see cref="F:System.Text.ValueStringBuilder._pos"/> whichever is greater.
+            </summary>
+            <param name="additionalCapacityBeyondPos">
+            Number of chars requested beyond current position.
+            </param>
+        </member>
+    </members>
+</doc>
